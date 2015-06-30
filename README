@@ -1,0 +1,62 @@
+# DOCS
+
+"Koopa" Log Monitor
+(c) 2013-2014 Will Sheppard
+
+An application to count instances of patterns in files, and graph them over time.
+i.e. Track errors and warnings in log files or automated test output.
+
+Everything is driven by the config file:
+    - which files to parse
+    - which data to save
+    - which graphs to display
+
+# COMPONENTS
+
+1) index.cgi        - The web front-end, displays graphs from historical data in the database
+
+2) process.sh       - Fetch the test logs from Jenkins, and the Live logs from the livelogs server,
+                        then call parse_logs.pl, then archive the logs afterwards.
+
+3) parse_logs.pl    - Parse logs according to the config, and load the results into the database
+
+# SETUP
+
+CREATE DATABASE log_monitor;
+CREATE TABLE pattern_count (
+    id SERIAL,
+    date DATE,
+    environment VARCHAR(100),
+    file VARCHAR(100),
+    pattern VARCHAR(100),
+    count INT
+);
+
+Also make sure the cron user can SSH to the livelogs server.
+
+# CRON
+
+DIR=/var/www/scripts/koopa
+30 06 * * * cd $DIR; /bin/bash $DIR/scripts/process.sh 2>&1 | mail -s 'Log monitor' -t 'someone@example.com'
+
+## Back-loading
+
+To fill the database with data from a set of past logs, use something like this:
+
+for k in $(seq 1 9)
+do
+    echo processing July 0$k
+    # Copy logs into place for processing
+    cp /var/www/scripts/koopa/data/test/2013070$k/*.log data/test/
+    # Parse logs and load into DB
+    /usr/bin/perl scripts/parse_logs.pl 2013 07 0$k &> /tmp/parse_back.log
+    # Remove logs again
+    rm data/test/*.log
+done
+
+# BUGS & TODO
+
+* Config file is a pain to modify when there are many different files with common patterns.
+    Need to refactor to make it easier to work with
+* Graph image generation is tightly coupled to page rendering. Need to refactor to decouple.
+

@@ -1,0 +1,282 @@
+{
+
+    "__documentation" : [
+        { "__comment"       : "This whole __documentation section will be ignored, but it must be valid JSON" },
+        { "pattern_files"   : "List of patterns and which files to look for them in" },
+        { "patterns"        : "All the possible patterns we want to look for, e.g. errors and warnings" },
+        { "files"           : "All the log files we want parsed, across all environments" },
+        { "environments"    : "All possible environments. Note the fully qualified paths" },
+        { "system"          : "Variables used to render the web page, connect to database, etc. Make sure you update these when installing for the first time." }
+    ],
+
+    "pattern_files" : [
+        {
+            "pattern"   : "log4perl_error",
+            "files"     : [ "app2_master" ]
+        },
+        {
+            "pattern"   : "log4perl_warn",
+            "files"     : [ "app2_master" ]
+        },
+        {
+            "pattern"   : "uninit",
+            "files"     : [ "app1_dc1", "app1_dc2", "app1_dc3", "app2_master", "app1_env_dc1", "app1_env_dc2", "app1_env_dc3", "app1_units_dc1", "app1_units_dc2", "app1_units_dc3", "app1_func_cancan_dc1", "app1_func_cancan_dc2", "app1_func_cancan_dc3", "app1_func_who_dc1", "app1_func_who_dc2", "app1_func_who_dc3", "app1_func_other_dc1", "app1_func_other_dc2", "app1_func_other_dc3", "app1_external_dc1", "app1_external_dc2", "app1_external_dc3" ]
+        },
+        {
+            "pattern"   : "logsnitch",
+            "files"     : [ "app1_env_dc1", "app1_env_dc2", "app1_env_dc3", "app1_units_dc1", "app1_units_dc2", "app1_units_dc3", "app1_func_cancan_dc1", "app1_func_cancan_dc2", "app1_func_cancan_dc3", "app1_func_who_dc1", "app1_func_who_dc2", "app1_func_who_dc3", "app1_func_other_dc1", "app1_func_other_dc2", "app1_func_other_dc3", "app1_external_dc1", "app1_external_dc2", "app1_external_dc3" ]
+        },
+        {
+            "pattern"   : "numeric",
+            "files"     : [ "app2",  "app1_dc1", "app1_dc2", "app1_dc3", "app2_master", "app1_env_dc1", "app1_env_dc2", "app1_env_dc3", "app1_units_dc1", "app1_units_dc2", "app1_units_dc3", "app1_func_cancan_dc1", "app1_func_cancan_dc2", "app1_func_cancan_dc3", "app1_func_who_dc1", "app1_func_who_dc2", "app1_func_who_dc3", "app1_func_other_dc1", "app1_func_other_dc2", "app1_func_other_dc3", "app1_external_dc1", "app1_external_dc2", "app1_external_dc3" ]
+        },
+        {
+            "pattern"   : "cols_deprecated",
+            "files"     : [ "app2",  "app1_dc1", "app1_dc2", "app1_dc3", "app2_master", "app1_env_dc1", "app1_env_dc2", "app1_env_dc3", "app1_units_dc1", "app1_units_dc2", "app1_units_dc3", "app1_func_cancan_dc1", "app1_func_cancan_dc2", "app1_func_cancan_dc3", "app1_func_who_dc1", "app1_func_who_dc2", "app1_func_who_dc3", "app1_func_other_dc1", "app1_func_other_dc2", "app1_func_other_dc3", "app1_external_dc1", "app1_external_dc2", "app1_external_dc3" ]
+        },
+        {
+            "pattern"   : "datetime_dbic",
+            "files"     : [ "app2",  "app1_dc1", "app1_dc2", "app1_dc3", "app2_master", "app1_env_dc1", "app1_env_dc2", "app1_env_dc3", "app1_units_dc1", "app1_units_dc2", "app1_units_dc3", "app1_func_cancan_dc1", "app1_func_cancan_dc2", "app1_func_cancan_dc3", "app1_func_who_dc1", "app1_func_who_dc2", "app1_func_who_dc3", "app1_func_other_dc1", "app1_func_other_dc2", "app1_func_other_dc3", "app1_external_dc1", "app1_external_dc2", "app1_external_dc3" ]
+        },
+        {
+            "pattern"   : "undef_unique",
+            "files"     : [ "app2",  "app1_dc1", "app1_dc2", "app1_dc3", "app2_master", "app1_env_dc1", "app1_env_dc2", "app1_env_dc3", "app1_units_dc1", "app1_units_dc2", "app1_units_dc3", "app1_func_cancan_dc1", "app1_func_cancan_dc2", "app1_func_cancan_dc3", "app1_func_who_dc1", "app1_func_who_dc2", "app1_func_who_dc3", "app1_func_other_dc1", "app1_func_other_dc2", "app1_func_other_dc3", "app1_external_dc1", "app1_external_dc2", "app1_external_dc3" ]
+        },
+        {
+            "pattern"   : "txn_scopeguard",
+            "files"     : [ "app2",  "app1_dc1", "app1_dc2", "app1_dc3", "app2_master", "app1_env_dc1", "app1_env_dc2", "app1_env_dc3", "app1_units_dc1", "app1_units_dc2", "app1_units_dc3", "app1_func_cancan_dc1", "app1_func_cancan_dc2", "app1_func_cancan_dc3", "app1_func_who_dc1", "app1_func_who_dc2", "app1_func_who_dc3", "app1_func_other_dc1", "app1_func_other_dc2", "app1_func_other_dc3", "app1_external_dc1", "app1_external_dc2", "app1_external_dc3" ]
+        },
+        {
+            "pattern"   : "autocommit_off",
+            "files"     : [ "app2",  "app1_dc1", "app1_dc2", "app1_dc3", "app2_master", "app1_env_dc1", "app1_env_dc2", "app1_env_dc3", "app1_units_dc1", "app1_units_dc2", "app1_units_dc3", "app1_func_cancan_dc1", "app1_func_cancan_dc2", "app1_func_cancan_dc3", "app1_func_who_dc1", "app1_func_who_dc2", "app1_func_who_dc3", "app1_func_other_dc1", "app1_func_other_dc2", "app1_func_other_dc3", "app1_external_dc1", "app1_external_dc2", "app1_external_dc3" ]
+        }
+    ],
+
+    "patterns" : {
+        "log4perl_error" : {
+            "regex"             : "[ERROR]",
+            "description"       : "ERROR level output",
+            "long_description"  : "Log4perl-generated ERROR output"
+        },
+        "log4perl_warn" : {
+            "regex"             : "[WARN]",
+            "description"       : "WARN level output",
+            "long_description"  : "Log4perl-generated WARN output"
+        },
+        "logsnitch" : {
+            "regex"             : "unhandled diagnostics or warnings",
+            "description"       : "Unexpected output in the error log",
+            "long_description"  : "Generated by Test::...::LogSnitch"
+        },
+        "uninit" : {
+            "regex"             : "Use of uninitialized value",
+            "description"       : "Basic Perl programming error",
+            "long_description"  : "There really should be none of these at all"
+        },
+        "numeric" : {
+            "regex"             : "Argument .+? isn't numeric",
+            "description"       : "Basic Perl programming error",
+            "long_description"  : "There really should be none of these at all"
+        },
+        "cols_deprecated" : {
+            "regex"             : "Resultset attribute 'cols' is deprecated, use 'columns' instead",
+            "description"       : "Using deprecated code",
+            "long_description"  : ""
+        },
+        "datetime_dbic" : {
+            "regex"             : "DateTime objects passed to search() are not supported properly",
+            "description"       : "Programming error",
+            "long_description"  : ""
+        },
+        "undef_unique" : {
+            "regex"             : "NULL/undef values supplied for requested unique constraint",
+            "description"       : "Database programming error",
+            "long_description"  : ""
+        },
+        "txn_scopeguard" : {
+            "regex"             : "A DBIx::Class::Storage::TxnScopeGuard went out of scope without explicit commit or error",
+            "description"       : "Database programming error",
+            "long_description"  : ""
+        },
+        "autocommit_off" : {
+            "regex"             : "schema for a dbh with autocommit turned off",
+            "description"       : "Another database programming error",
+            "long_description"  : "You have tried to get a schema for a dbh with autocommit turned off - please don't do this, it 'breaks' DBIC transactions"
+        }
+    },
+
+    "files" : {
+        "app2" : {
+            "filename"      : "job.app2.full/app2_app.log.1",
+            "description"   : "Full app2",
+            "environment"   : "live"
+        },
+        "app1_dc1" : {
+            "filename"      : "job.acdc1/app1.log.1",
+            "description"   : "app1 DC1",
+            "environment"   : "live"
+        },
+        "app1_dc2" : {
+            "filename"      : "job.acdc2/app1-YYYYMMDD.log",
+            "description"   : "app1 DC2 (datestamped filenames not implemented yet)",
+            "environment"   : "live"
+        },
+        "app1_dc3" : {
+            "filename"      : "job.acdc3/app1.log.1",
+            "description"   : "app1 DC3",
+            "environment"   : "live"
+        },
+        "fandango" : {
+            "filename"		: "fandango_master.log",
+            "description"   : "Fandango test output",
+            "environment"   : "test"
+        },
+        "doc_mcstuffin" : {
+            "filename"		: "doc-mcstuffin_master.log",
+            "description"   : "Doc mcstuffin test output",
+            "environment"   : "test"
+        },
+        "debt_collector" : {
+            "filename"		: "debt-collector_master.log",
+            "description"   : "Debt collector test output",
+            "environment"   : "test"
+        },
+        "app2_master" : {
+            "filename"		: "app2_master.log",
+            "description"   : "app2 test output",
+            "environment"   : "test"
+        },
+        "rain_collector" : {
+            "filename"		: "rain-collector_master.log",
+            "description"   : "Rain collector test output",
+            "environment"   : "test"
+        },
+        "wikkipuds" : {
+            "filename"		: "wikkipuds.log",
+            "description"   : "wikkipuds test output",
+            "environment"   : "test"
+        },
+
+
+
+        "app1_env_dc1" : {
+            "filename"		: "app1_master_env_dc1.log",
+            "description"   : "app1 env DC1 test output",
+            "environment"   : "test"
+        },
+        "app1_env_dc2" : {
+            "filename"		: "app1_master_env_dc2.log",
+            "description"   : "app1 env DC2 test output",
+            "environment"   : "test"
+        },
+        "app1_env_dc3" : {
+            "filename"		: "app1_master_env_dc3.log",
+            "description"   : "app1 env DC3 test output",
+            "environment"   : "test"
+        },
+
+        "app1_units_dc1" : {
+            "filename"		: "app1_master_units_dc1.log",
+            "description"   : "app1 units DC1 test output",
+            "environment"   : "test"
+        },
+        "app1_units_dc2" : {
+            "filename"		: "app1_master_units_dc2.log",
+            "description"   : "app1 units DC2 test output",
+            "environment"   : "test"
+        },
+        "app1_units_dc3" : {
+            "filename"		: "app1_master_units_dc3.log",
+            "description"   : "app1 units DC3 test output",
+            "environment"   : "test"
+        },
+
+        "app1_func_cancan_dc1" : {
+            "filename"		: "app1_master_func_cancan_dc1.log",
+            "description"   : "app1 functional cancan DC1 test output",
+            "environment"   : "test"
+        },
+        "app1_func_cancan_dc2" : {
+            "filename"		: "app1_master_func_cancan_dc2.log",
+            "description"   : "app1 functional cancan DC2 test output",
+            "environment"   : "test"
+        },
+        "app1_func_cancan_dc3" : {
+            "filename"		: "app1_master_func_cancan_dc3.log",
+            "description"   : "app1 functional cancan DC3 test output",
+            "environment"   : "test"
+        },
+
+        "app1_func_who_dc1" : {
+            "filename"		: "app1_master_func_who_dc1.log",
+            "description"   : "app1 functional who DC1 test output",
+            "environment"   : "test"
+        },
+        "app1_func_who_dc2" : {
+            "filename"		: "app1_master_func_who_dc2.log",
+            "description"   : "app1 functional who DC2 test output",
+            "environment"   : "test"
+        },
+        "app1_func_who_dc3" : {
+            "filename"		: "app1_master_func_who_dc3.log",
+            "description"   : "app1 functional who DC3 test output",
+            "environment"   : "test"
+        },
+
+        "app1_func_other_dc1" : {
+            "filename"		: "app1_master_func_other_dc1.log",
+            "description"   : "app1 functional other DC1 test output",
+            "environment"   : "test"
+        },
+        "app1_func_other_dc2" : {
+            "filename"		: "app1_master_func_other_dc2.log",
+            "description"   : "app1 functional other DC2 test output",
+            "environment"   : "test"
+        },
+        "app1_func_other_dc3" : {
+            "filename"		: "app1_master_func_other_dc3.log",
+            "description"   : "app1 functional other DC3 test output",
+            "environment"   : "test"
+        },
+
+        "app1_external_dc1" : {
+            "filename"		: "app1_master_external_dc1.log",
+            "description"   : "app1 external DC1 test output",
+            "environment"   : "test"
+        },
+        "app1_external_dc2" : {
+            "filename"		: "app1_master_external_dc2.log",
+            "description"   : "app1 external DC2 test output",
+            "environment"   : "test"
+        },
+        "app1_external_dc3" : {
+            "filename"		: "app1_master_external_dc3.log",
+            "description"   : "app1 external DC3 test output",
+            "environment"   : "test"
+        }
+    },
+
+    "environments" : {
+        "test" : {
+            "description"   : "Tests output",
+            "path"          : "/var/www/scripts/koopa/data/process"
+        },
+        "live" : {
+            "description"   : "Live logs",
+            "path"          : "/var/www/scripts/koopa/data/process"
+        }
+    },
+
+    "system" : {
+        "database" : {
+            "name"  : "log_monitor",
+            "user"  : "postgres",
+            "table" : "pattern_count"
+        },
+        "template" : {
+            "base_full_path" : "/var/www/scripts/koopa",
+            "images_path" : "/scripts/koopa/images"
+        }
+    }
+
+}

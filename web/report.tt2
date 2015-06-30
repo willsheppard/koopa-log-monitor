@@ -1,0 +1,92 @@
+<html>
+<head>
+
+<title>Koopa log monitor</title>
+
+<script type="text/javascript" src="/scripts/koopa/js/jquery-2.1.0.js"></script>
+
+<script type="text/javascript">
+    $('#node_title').on('click', function() {
+        $('#note_content').slideToggle();
+    });
+</script>
+
+<style>
+.lower { position: relative; top: 10px }
+.higher { position: relative; top: -20px }
+</style>
+
+</head>
+<body>
+
+<h1>Koopa log monitor</h1>
+
+<p><img src="/scripts/koopa/images/koopa_200.png" /></p>
+
+<p><a href="http://confluence.example.com/display/Team/Koopa+log+monitor">Documentation</a></p>
+
+[% FOREACH env IN environments.keys %]
+<h2>[% environments.$env.description %]</h2>
+
+    [% FOREACH fp IN file_patterns %]
+        [% this_file = fp.file %]
+        [% NEXT UNLESS env == files.$this_file.environment %]
+
+        <div id="node_title">
+            <h3>[% files.$this_file.description %]</h3>
+        </div>
+
+        <div id="node_content">
+        <table border="1" cellpadding="10">
+        <tr>
+            [% FOREACH pc IN fp.pattern_counts %]
+
+            [%# Skip if there have _never_ been any matches %]
+            [% total_count = 0 %]
+            [% FOREACH count IN pc.historic_data %]
+                [% total_count = total_count + count.1 %]
+            [% END %]
+            [% NEXT UNLESS total_count %]
+
+            [% this_pattern = pc.pattern %]
+            <td>
+                <h4>[% patterns.$this_pattern.regex %]</h4>
+                <div class="higher" title="[% patterns.$this_pattern.description _ '. ' _ patterns.$this_pattern.long_description %]">
+                    <small>([% patterns.$this_pattern.description %])</small>
+                </div>
+                [%# TODO: Move this hard-coded path to config. Why doesnt system.template.images_path work? %]
+                [%# '<!--img src="[% system.template.images_path ]/[\% pc.graph_filename ]"/-->' %]
+                <img src="/scripts/koopa/images/[% pc.graph_filename %]"/>
+            </td>
+            [% END %]
+        </tr>
+        </table>
+        </div>
+
+    [% END %]
+
+[% END %]
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<hr>
+
+<table border="1" cellpadding="10">
+<tr><td>
+
+<h4>Legend:</h4>
+
+<div><img class="lower" src="/scripts/koopa/images/legend_1.gif"/>Current count is non-zero, indicates a problem</div>
+<div><img class="lower" src="/scripts/koopa/images/legend_2.gif"/>Current count is zero, there are no outstanding problems</div>
+<br>
+If a pattern has <em>never</em> matched in a file, that graph will not be displayed at all.
+
+</td></tr>
+</table>
+
+<p>Send bugs/suggestions to <a href="mailto:nobody@example.com">Nobody</a></p>
+
+</body>
